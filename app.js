@@ -20,7 +20,8 @@ db.once('open', function() {
 app.set('views', path.join(__dirname, 'views'));
 // set the view engine to ejs
 app.set('view engine', 'ejs');
-
+// use public folder
+app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 
 // run

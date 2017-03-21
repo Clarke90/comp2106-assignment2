@@ -1,5 +1,39 @@
 <% include ./partials/header.ejs %>
 
-    <h1>This is a test</h1>
+<% include ./partials/navigation.ejs %>
+
+
+<div class="section hero">
+<div class="container">
+<div class="row">
+  <div class="col-sm-6">
+    <h2 class="hero-heading">Pick the approximate size of your cup! This will be used for tracking the volume.</h2>
+    <div class="dropdown">
+      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        Cup Sizes
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li><a href="#">50 ml</a></li>
+        <li><a href="#">100 ml</a></li>
+        <li><a href="#">150 ml</a></li>
+        <!-- <li role="separator" class="divider"></li> -->
+        <li><a href="#">200 ml</a></li>
+        <li><a href="#">250 ml</a></li>
+        <li><a href="#">300 ml</a></li>
+      </ul>
+    </div>
+
+    <a class="btn btn-primary" href="#">Select Cup Size</a>
+  </div>
+  <div class="col-sm-6 phones">
+    <img class="phone" src="/images/iphone.png" height="500" width="auto">
+  </div>
+</div>
+<i class="fa fa-arrow-circle-o-right fa-5x pull-right next-arrow" aria-hidden="true"></i>
+</div>
+</div>
+
+
 
 <% include ./partials/footer.ejs %>
