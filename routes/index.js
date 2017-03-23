@@ -59,7 +59,7 @@ router.post('/register', function(req, res, next){
 
 /* POST login */
 router.post('/login', passport.authenticate('local', {
-  successRedirect: '/staff-dashboard',
+  successRedirect: '/landingpage',
     failureRedirect: '/login',
     failureMessage: 'Invalid Login'
 }));

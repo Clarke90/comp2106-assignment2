@@ -55,7 +55,7 @@ var Account = require('./models/account');
 passport.use(Account.createStrategy());
 
 // write / read user login to our database
-passport.serializeUser(Account.serializeUser);
+passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());
 
 //routes
