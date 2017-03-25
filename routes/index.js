@@ -15,10 +15,11 @@ router.get('/stats', function(req, res, next){
   res.render('stats', { title:'Stats'});
 });
 
-/* GET records page. */
-router.get('/records', function(req, res, next){
-  res.render('records', { title:'Records'});
-});
+// /* GET records page. */
+// router.get('/records', function(req, res, next){
+//   res.render('records', { title:'Records'});
+// });
+
 
 /* GET records page. */
 router.get('/landingpage', function(req, res, next){
@@ -61,7 +62,8 @@ router.post('/register', function(req, res, next){
 router.post('/login', passport.authenticate('local', {
   successRedirect: '/landingpage',
     failureRedirect: '/login',
-    failureMessage: 'Invalid Login'
+    failureMessage: 'Invalid Login',
+      // res.redirect('/users/' + req.user.username);
 }));
 
 

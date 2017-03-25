@@ -10,10 +10,9 @@ var session = require('express-session');
 var localStrategy = require('passport-local').Strategy;
 
 var index = require('./routes/index');
-
+var work = require('./routes/work');
 
 var app = express();
-
 
 // mongodb connection
 var mongoose = require('mongoose');
@@ -27,6 +26,18 @@ let db = mongoose.connection;
 //leave connection open
 db.once('open', function() {
   console.log('Connected to mongodb');
+
+  mongoose.connection.db.collection('sleep', function(err, docs) {
+      // Check for error
+      if(err) return console.log(err);
+      // Walk through the cursor
+      docs.find().each(function(err, doc) {
+          // Check for error
+          if(err) return console.err(err);
+          // Log document
+          console.log(doc);
+      })
+  });
 });
 
 app.set('views', path.join(__dirname, 'views'));
@@ -60,10 +71,15 @@ passport.deserializeUser(Account.deserializeUser());
 
 //routes
 app.use('/', index);
+app.use('/', work);
 
 
-
-
+// catch 404
+app.use(function(req, res, next) {
+  var err = new Error('Not Found', { title: '404' });
+  err.status = 404;
+  next(err);
+});
 
 // run
 app.listen(3000, function () {
