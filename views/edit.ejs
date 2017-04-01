@@ -1,0 +1,33 @@
+<% include ./partials/header.ejs %>
+
+<form method="post" class="form-horizontal">
+  <fieldset>
+    <div class="form-group">
+          <label for="name" class="col-sm-5 control-label">Name: *</label>
+              <div>
+                  <input name="name" id="name" required value="<%= Hour.name %>"/>
+            </div>
+      </div>
+      <div class="form-group">
+            <label for="date" class="col-sm-5 control-label">Date: *</label>
+                <div>
+                    <input name="date" id="date" required value="<%= Hour.date %>"/>
+              </div>
+        </div>
+        <div class="form-group">
+              <label for="starttime" class="col-sm-5 control-label">Start Time: *</label>
+                  <div>
+                      <input name="starttime" id="starttime" required value="<%= Hour.starttime %>"/>
+                </div>
+          </div>
+          <div class="form-group">
+                <label for="endtime" class="col-sm-5 control-label">End Time: *</label>
+                    <div>
+                        <input name="endtime" id="endtime" required value="<%= Hour.endtime %>"/>
+                  </div>
+            </div>
+  </fieldset>
+    <button class="btn btn-primary col-sm-offset-2">Save</button>
+</form>
+
+<% include ./partials/footer.ejs %>

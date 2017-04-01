@@ -1,3 +1,21 @@
-body{
-  background-color: #242424!important;
+html body{
+  background-image: url('/images/geometry.png');
+  position: relative;
+}
+h1{
+  font-size: 5em;
+}
+img.phone {
+    width: 100%;
+}
+hr{
+  height:3px;
+  border:none;
+  color: #26BA9A;
+  background-color: #26BA9A;;
+  margin-top:2px;
+}
+span p{
+    color: #26BA9A;
+    font-size: 1.2em;
 }

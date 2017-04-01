@@ -4,17 +4,18 @@ let mongoose = require('mongoose');
 let camperSchema = new mongoose.Schema({
   name:{
     type: String,
-    required: 'First Name is Required'
   },
   date:{
-    type: Number,
-    required: 'First Name is Required'
+    type: Date,
   },
   starttime:{
     type: Number,
-    required: 'Last Name is required'
+  },
+  endtime:{
+    type: Number,
   }
+
 });
 
 //make the model public
-module.exports = mongoose.model('Camper', camperSchema);
+module.exports = mongoose.model('Hour', camperSchema);

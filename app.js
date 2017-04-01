@@ -27,7 +27,7 @@ let db = mongoose.connection;
 db.once('open', function() {
   console.log('Connected to mongodb');
 
-  mongoose.connection.db.collection('sleep', function(err, docs) {
+  mongoose.connection.db.collection('hours', function(err, docs) {
       // Check for error
       if(err) return console.log(err);
       // Walk through the cursor
@@ -35,7 +35,7 @@ db.once('open', function() {
           // Check for error
           if(err) return console.err(err);
           // Log document
-          console.log(doc);
+          // console.log(doc);
       })
   });
 });
@@ -85,3 +85,5 @@ app.use(function(req, res, next) {
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!')
 })
+
+module.exports = app;

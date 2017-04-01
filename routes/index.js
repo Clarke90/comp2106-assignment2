@@ -5,9 +5,13 @@ var passport = require('passport');
 var Account = require('../models/account')
 
 
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'test' });
+  res.render('index', {
+    title: 'test',
+    user:req.user
+  });
 });
 
 /* GET stats page. */
@@ -15,16 +19,23 @@ router.get('/stats', function(req, res, next){
   res.render('stats', { title:'Stats'});
 });
 
-// /* GET records page. */
-// router.get('/records', function(req, res, next){
-//   res.render('records', { title:'Records'});
-// });
-
-
 /* GET records page. */
 router.get('/landingpage', function(req, res, next){
-  res.render('landingpage', { title:'Hello!'});
+  res.render('landingpage', {
+    title:'Hello!',
+    user: req.user
+  });
 });
+
+/* GET error page */
+router.get('/error', function(req, res, next){
+    res.render('error', { title:'Youve got an ERROR'});
+});
+
+// /* GET add page */
+// router.get('/add', function(req, res, next){
+//     res.render('add', { title:'Add'});
+// });
 
 /* GET register */
 router.get('/register', function(req, res, next) {
@@ -41,7 +52,8 @@ router.get('/login', function(req, res, next){
 
   res.render('login', {
     title:'Login',
-      messages: messages
+      messages: messages,
+      user: req.user
       });
 });
 
@@ -57,6 +69,12 @@ router.post('/register', function(req, res, next){
     res.redirect('/landingpage') //success
   });
 });
+
+//GET Logout handler
+router.get('/logout', function(req,res, next ){
+  req.logout();
+  res.redirect('/');
+})
 
 /* POST login */
 router.post('/login', passport.authenticate('local', {

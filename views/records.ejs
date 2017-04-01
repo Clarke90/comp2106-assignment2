@@ -1,12 +1,36 @@
 <% include ./partials/header.ejs %>
-
 <% include ./partials/navigation.ejs %>
+
+<a href="/landingpage">Add a new record</a>
+
 <div class="section hero">
 <div class="container">
 <div class="row">
-
+  <table class="table">
+      <tr>
+          <th class="text-center">Name</th>
+          <th class="text-center">Date</th>
+          <th class="text-center">Start Time</th>
+          <th class="text-center">End Time</th>
+          <th class="text-center">Actions</th>
+      </tr>
+      <% for (var i = 0; i < hours.length; i++) { %>
+          <tr>
+            <td class="text-center"><%= hours[i].name %></td>
+            <td class="text-center"><%= hours[i].date %></td>
+            <td class="text-center"><%= hours[i].starttime %></td>
+            <td class="text-center"><%= hours[i].endtime %></td>
+            <td class="text-center">
+                <a href="/edit/<%= hours[i]._id %>" class="btn btn-info">Edit</a>
+                <a href="/<%= hours[i]._id %>" class="btn btn-danger confirmation">Delete</a>
+            </td>
+          </tr>
+      <% } %>
+  </table>
 </div>
-<a href="stats"><i class="fa fa-arrow-circle-o-right fa-5x pull-right next-arrow" aria-hidden="true"></i></a>
+
+<div class="clock"></div>
+
 </div>
 </div>
 
