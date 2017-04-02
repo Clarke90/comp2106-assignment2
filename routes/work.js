@@ -5,6 +5,7 @@ var Hour = require('../models/hour')
 
 var mongoose = require('mongoose');
 
+
 // Find hours and display from model controller
 router.get('/records', function(req, res, next) {
 Hour.find(function(err, doc){
@@ -23,11 +24,10 @@ else{
 }
   });
 
-
 });
 
 // Add new data to db from landpage form
-router.post('/', function(req, res, next) {
+router.post('/landingpage', function(req, res, next) {
    // use the model to add a new document to mongodb
    Hour.create({
       name: req.body.name,
@@ -97,6 +97,7 @@ router.get('/:_id', function(req, res, next) {
         res.redirect('/records')
     });
 });
+
 
 
 module.exports = router;
