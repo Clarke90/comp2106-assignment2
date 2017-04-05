@@ -65,6 +65,62 @@ var Account = require('./models/account');
 
 passport.use(Account.createStrategy());
 
+// add Git auth
+var githubStrategy = require('passport-github').Strategy;
+
+// configure Git auth
+passport.use(new githubStrategy({
+  clientID: '3c670c9ac29117bbbc4d',
+  clientSecret: '2b446191de17e472fc448f47ae924f642457515a',
+  callbackURL: "http://localhost:3000/github/callback"
+    }, function(accessToken, refreshToken, profile, cb) {
+
+      Account.findOne({ oauthID: profile.id }, function(err, user) {
+        if (err) {
+          console.log(err);
+        }
+        else {
+          if (!err && user != null) { // is the github user in our db
+            cb(null,  user);
+          }
+          else {
+            // create a new user from the github profile
+            user = new Account({
+              oauthID: profile.id,
+              username: profile.username,
+              created: Date.now()
+            });
+
+            user.save(function(err, user) {
+              if (err) {
+                console.log(err);
+              }
+              else {
+                cb(null, user);
+              }
+            });
+          }
+        }
+      });
+    }
+));
+
+// linkedin login
+
+var LinkedInStrategy = require('passport-linkedin').Strategy;
+
+passport.use(new LinkedInStrategy({
+    consumerKey: '78hzrz0cy9zidi',
+    consumerSecret: 'EC4T0wKl8sLb7VCs',
+    callbackURL: "http://localhost:3000/auth/linkedin/callback"
+  },
+  function(token, tokenSecret, profile, done) {
+    User.findOne({ linkedinId: profile.id }, function (err, user) {
+     return done(err, user);
+   });
+  }
+));
+
 // write / read user login to our database
 passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());
@@ -80,11 +136,6 @@ app.use(function(req, res, next) {
   err.status = 404;
   next(err);
 });
-
-
-
-
-
 
 // run
 app.listen(3000, function () {

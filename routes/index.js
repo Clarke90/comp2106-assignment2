@@ -3,7 +3,7 @@ var router = express.Router();
 
 var passport = require('passport');
 var Account = require('../models/account')
-
+var LinkedInStrategy = require('passport-linkedin').Strategy;
 
 
 /* GET home page. */
@@ -81,8 +81,31 @@ router.post('/login', passport.authenticate('local', {
   successRedirect: '/landingpage',
     failureRedirect: '/login',
     failureMessage: 'Invalid Login',
-      // res.redirect('/users/' + req.user.username);
 }));
 
+/* GET /github - show github login popup */
+router.get('/github', passport.authenticate('github'));
+
+/* GET /github/callback */
+router.get('/github/callback', passport.authenticate('github', {
+  failureRedirect: '/login',
+  failureMessage: 'Invalid Login'
+}), function(req, res, next) {
+  res.redirect('/landingpage');
+});
+
+// Get /LinkedIn
+router.get('/auth/linkedin',
+  passport.authenticate('linkedin'),
+  function(req, res){
+    // The request will be redirected to LinkedIn for authentication, so this
+    // function will not be called.
+  });
+
+  router.get('/auth/linkedin/callback',
+  passport.authenticate('linkedin', { failureRedirect: '/login' }),
+  function(req, res) {
+    res.redirect('/');
+  });
 
 module.exports = router;

@@ -1,7 +1,7 @@
 // mongoose
 let mongoose = require('mongoose');
 
-let camperSchema = new mongoose.Schema({
+let trackerSchema = new mongoose.Schema({
   name:{
     type: String,
   },
@@ -14,8 +14,7 @@ let camperSchema = new mongoose.Schema({
   endtime:{
     type: Number,
   }
-
 });
 
 //make the model public
-module.exports = mongoose.model('Hour', camperSchema);
+module.exports = mongoose.model('Hour', trackerSchema);
