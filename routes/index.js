@@ -81,19 +81,11 @@ router.get('/error', function(req, res, next){
     res.render('error', { title:'Youve got an ERROR'});
 });
 
-// /* GET add page */
-// router.get('/add', function(req, res, next){
-//     res.render('add', { title:'Add'});
-// });
-
-
 //GET Logout handler
 router.get('/logout', function(req,res, next ){
   req.logout();
   res.redirect('/');
 })
-
-
 
 /* GET /github - show github login popup */
 router.get('/github', passport.authenticate('github'));

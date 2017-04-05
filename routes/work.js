@@ -79,15 +79,17 @@ router.get('/edit/:_id', function(req, res, next) {
             res.render('error');
             return;
         }
-        res.render('edit', {
-            Hour: hours
-        });
+        else{
+          res.render('edit', {
+              Hour: hours,
+              user: req.user
+          });
+      }
     });
 });
 
-
 //Get the id of data collection and delete it
-router.get('/:_id', function(req, res, next) {
+router.get('/edit/:_id', function(req, res, next) {
     Hour.remove({ _id: req.params._id }, function(err) {
         if (err) {
             console.log(err);
@@ -97,6 +99,29 @@ router.get('/:_id', function(req, res, next) {
         res.redirect('/records')
     });
 });
+
+// get the id and save the new update
+
+router.post('/edit/:_id', function(req, res, next) {
+    let hour = new Hour({
+      name: req.body.name,
+      date: req.body.date,
+      starttime: req.body.starttime,
+      endtime: req.body.endtime
+    });
+
+    //call mongoose update method,
+    Hour.update({ _id: req.params._id }, hour, function(err) {
+        if (err) {
+            console.log(err);
+            res.render('error');
+            return;
+        }
+        res.redirect('/records')
+    })
+})
+
+
 
 
 
